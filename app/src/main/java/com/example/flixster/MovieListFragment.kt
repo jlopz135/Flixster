@@ -13,13 +13,8 @@ import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.google.gson.Gson
-import com.google.gson.JsonParser
-import com.google.gson.reflect.TypeToken
 import okhttp3.Headers
 import org.json.JSONArray
-
-
-import org.json.JSONObject
 import java.io.StringReader
 import java.util.*
 
@@ -63,13 +58,10 @@ class MovieListFragment : Fragment(), OnListFragmentInteractionListener {
                     ) {
                         // The wait for a response is over
                         progressBar.hide()
-                        Log.v("JSON TEST", json.toString())
 
                         val resultsJSON : JSONArray = json.jsonObject.getJSONArray("results")
-
-
                         val gson = Gson()
-                        var stringReader: StringReader = StringReader(resultsJSON.toString())
+                        val stringReader = StringReader(resultsJSON.toString())
                         val models : List<Movie> = gson.fromJson(stringReader, Array<Movie>::class.java).toList()
                         recyclerView.adapter = MovieListAdapter(models, this@MovieListFragment)
 
