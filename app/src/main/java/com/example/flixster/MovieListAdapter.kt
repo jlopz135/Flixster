@@ -1,16 +1,13 @@
 package com.example.flixster
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 
 class MovieListAdapter(
@@ -43,9 +40,12 @@ class MovieListAdapter(
         holder.mMovieTitle.text = movie.movie_title
         holder.mMovieDescription.text = movie.description
 
+
         Glide.with(holder.mView)
             .load("https://image.tmdb.org/t/p/w500/"+ movie.imageUrl)
             .centerInside()
+            .apply(RequestOptions()
+                .placeholder(R.drawable.placeholder))
             .into(holder.mMovieImage)
 
         holder.mView.setOnClickListener {
